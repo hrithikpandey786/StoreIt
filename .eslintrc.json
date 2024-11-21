@@ -1,3 +1,29 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": ["next/core-web-vitals", "next/typescript", "standard", "plugin:tailwindcss/recommended", "prettier"]
 }
+
+
+
+// {
+//   "env": {
+//     "browser": true,
+//     "es2021": true,
+//     "node": true
+//   },
+//   "extends": [
+//     "eslint:recommended",
+//     "plugin:react/recommended",
+//     "plugin:@typescript-eslint/recommended", // If using TypeScript
+//     "plugin:prettier/recommended" // Enables eslint-plugin-prettier and displays Prettier issues as ESLint errors
+//   ],
+//   "parser": "@typescript-eslint/parser", // If using TypeScript
+//   "parserOptions": {
+//     "ecmaVersion": 12,
+//     "sourceType": "module"
+//   },
+//   "plugins": ["react", "@typescript-eslint"], // Add @typescript-eslint if using TypeScript
+//   "rules": {
+//     "prettier/prettier": "error" // Ensures Prettier errors are flagged as ESLint errors
+//   }
+// }
+
