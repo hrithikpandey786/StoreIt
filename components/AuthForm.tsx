@@ -88,7 +88,7 @@ export function AuthForm({type}: {type: FormType}) {
             </FormItem>
           )}
         />
-        <Button type="submit" className="form-submit-button" disabled={isLoading}>{type==="sign-in"?"Login":"Create Account"}{isLoading&&<Image 
+        <Button type="submit" className="form-submit-button" disabled={isLoading}>{type==="sign-in"?"Login":"Sign Up"}{isLoading&&<Image 
             src="/assets/icons/loader.svg"
             alt="loader"
             width={24}
