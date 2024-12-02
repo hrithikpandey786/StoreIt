@@ -30,6 +30,7 @@ import { verifySecret, sendEmailOTP } from "@/lib/actions/user.actions";
     const [isOpen, setIsOpen] = React.useState(true);
     const [password, setIsPassword] = React.useState('');
     const [isLoading, setIsLoading] = React.useState(false);
+    const [errorMessage, setErrorMessage] = React.useState('');
 
     const router = useRouter();
 
@@ -47,7 +48,8 @@ import { verifySecret, sendEmailOTP } from "@/lib/actions/user.actions";
             if(sessionId)
                 router.push("/");
         } catch(err){
-            console.log("Failed to verify OTP", err);
+            console.log("Failed to verify OTP", String(err));
+            setErrorMessage(String(err).split('|')[0]);
         }
 
         setIsLoading(false);
@@ -55,7 +57,7 @@ import { verifySecret, sendEmailOTP } from "@/lib/actions/user.actions";
 
     return (
         <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
-            <AlertDialogTrigger>Open</AlertDialogTrigger>
+            {/* <AlertDialogTrigger>Open</AlertDialogTrigger> */}
             <AlertDialogContent className="shad-alert-dialog">
                 <AlertDialogHeader className="relative flex j-center">
                 {/* <AlertDialogTitle className="h2 text-center">Are you absolutely sure?</AlertDialogTitle> */}
@@ -113,6 +115,7 @@ import { verifySecret, sendEmailOTP } from "@/lib/actions/user.actions";
                 </div>
                 </div>
                 </AlertDialogFooter>
+                {errorMessage}
             </AlertDialogContent>
         </AlertDialog>
 

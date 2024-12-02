@@ -37,10 +37,10 @@ export function AuthForm({type}: {type: FormType}) {
   // ...
   const [accountId, setAccountId] = React.useState('');
   const [isLoading, setIsLoading] = React.useState(false);
-    const [errorMessage, setErrorMessage] = React.useState('');
+  const [errorMessage, setErrorMessage] = React.useState('');
      // 1. Define your form.
 
-     const formSchema = authFormSchema(type);
+  const formSchema = authFormSchema(type);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -105,7 +105,7 @@ export function AuthForm({type}: {type: FormType}) {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="form-submit-button" disabled={isLoading}>{type==="sign-in"?"Login":"Sign Up"}{isLoading&&<Image 
+            <Button type="submit" className="form-submit-button" disabled={isLoading}>{type==="sign-in"?"Login":"Create Account"}{isLoading&&<Image 
                 src="/assets/icons/loader.svg"
                 alt="loader"
                 width={24}
