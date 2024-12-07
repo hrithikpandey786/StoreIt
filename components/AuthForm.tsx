@@ -59,7 +59,7 @@ export function AuthForm({type}: {type: FormType}) {
       const user = await createAccount(values.fullName || "", values.email);
 
       setAccountId(user.accountId);
-      // console.log(user.accountId);
+      console.log(user.accountId);
     } catch(error){
         setErrorMessage("Failed to create account, PLease try again!");
     } finally{
