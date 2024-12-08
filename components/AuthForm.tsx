@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { OTPModal } from "./ui/OTPModal";
 
-import { createAccount } from "@/lib/actions/user.actions";
+import { createAccount, signInUser } from "@/lib/actions/user.actions";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -56,10 +56,11 @@ export function AuthForm({type}: {type: FormType}) {
     setErrorMessage("");
     // console.log(values.fullName, values.email);
     try{
-      const user = await createAccount(values.fullName || "", values.email);
+      const user = type==="sign-up"? await createAccount(values.fullName || "", values.email)
+      :await signInUser({email: values.email});
 
       setAccountId(user.accountId);
-      console.log(user.accountId);
+      // console.log(user.accountId);
     } catch(error){
         setErrorMessage("Failed to create account, PLease try again!");
     } finally{
