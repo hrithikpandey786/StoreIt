@@ -58,7 +58,7 @@ export function AuthForm({type}: {type: FormType}) {
     try{
       const user = type==="sign-up"? await createAccount(values.fullName || "", values.email)
       :await signInUser({email: values.email});
-
+      console.log(user.accountId);
       setAccountId(user.accountId);
       // console.log(user.accountId);
     } catch(error){

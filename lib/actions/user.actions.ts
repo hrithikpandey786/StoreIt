@@ -10,7 +10,7 @@ import { redirect } from "next/navigation";
 
 const handleError = async (error: unknown, message: string) => {
     console.log(error, message);
-    throw new Error(`${message} | Original Error: ${String(error)}`);
+    throw error;
 }
 
 
@@ -24,7 +24,7 @@ const getUserByEmail = async (email: string) =>{
             appwriteConfig.userCollectionId,
             [Query.equal("email", [email])],
         );
-        // console.log(email);
+        console.log("ggetuserbyemail", result);
         return result.total>0?result.documents[0]:null;
     } catch(err){
         console.log(err);
@@ -32,12 +32,12 @@ const getUserByEmail = async (email: string) =>{
     }
 };
 
-export const sendEmailOTP = async (email: string) => {
+export const sendEmailOTP = async (email: string) => { //returning userId
     const {account} = await createAdminClient();
 
     try{
         const session = await account.createEmailToken(ID.unique(), email);
-
+        console.log("sendEmailOTP", session);
         return session.userId;
     } catch(error){
         await handleError(error, "Failed to send email OTP");
@@ -74,24 +74,51 @@ export const createAccount = async (fullName: string, email: string)=>{
     }
 }   
 
-export const verifySecret = async({accountId, password}: {accountId: string; password: string})=>{
-    try{
-        const {account} = await createAdminClient();
+// export const verifySecret = async({accountId, password}: {accountId: string; password: string})=>{
+//     try{
+//         const {account} = await createAdminClient();
+//         console.log("verify secret", password, account);
+//         const session = await account.createSession(accountId, password);
 
-        const session = await account.createSession(accountId, password);
+//         (await cookies()).set("appwrite_session", session.secret, {
+//             path: "/",
+//             httpOnly: true,
+//             sameSite: 'strict',
+//             secure: true
+//         })
 
-        (await cookies()).set("appwrite_session", session.secret, {
-            path: "/",
-            httpOnly: true,
-            sameSite: 'strict',
-            secure: true
-        })
+//         return parseStringify({sessionId: session.$id});
+//     } catch(err){
+//         await handleError(err, "Failed to verify OTP");
+//     }
+// }
 
-        return parseStringify({sessionId: session.$id});
-    } catch(err){
-        await handleError(err, "Failed to verify OTP");
+
+export const verifySecret = async ({
+    accountId,
+    password,
+  }: {
+    accountId: string;
+    password: string;
+  }) => {
+    try {
+      const { account } = await createAdminClient();
+        console.log(accountId, password);
+      const session = await account.createSession(accountId, password);
+  
+      (await cookies()).set("appwrite-session", session.secret, {
+        path: "/",
+        httpOnly: true,
+        sameSite: "strict",
+        secure: true,
+      });
+  
+      return parseStringify({ sessionId: session.$id });
+    } catch (error) {
+      handleError(error, "Failed to verify OTP");
     }
-}
+  };
+
 
 // export const getCurrentUser = async() =>{
 
@@ -151,7 +178,7 @@ export const getCurrentUser = async () => {
   export const signInUser = async ({email}: {email: string}) =>{
     try{
         const existingUser = await getUserByEmail(email);
-
+        console.log("signInUser", existingUser);
         if(existingUser){
             await sendEmailOTP(email);
 

@@ -41,9 +41,10 @@ import { verifySecret, sendEmailOTP } from "@/lib/actions/user.actions";
     const handleSubmit = async(e: React.MouseEvent<HTMLButtonElement>)=>{
         e.preventDefault();
         setIsLoading(true);
+        setErrorMessage("");
 
         try{
-            const sessionId = await verifySecret({accountId, password});
+            const sessionId = await verifySecret({accountId: accountId, password: password});
 
             if(sessionId)
                 router.push("/");

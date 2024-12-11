@@ -4,6 +4,7 @@ import MobileNavigation from "../../components/MobileNavigation";
 import Header from "../../components/Header";
 import { getCurrentUser } from "@/lib/actions/user.actions";
 import { redirect } from "next/navigation";
+import { avatarPlaceholderUrl } from "@/constants";
 
 
 const layout = async ({children}: {children: React.ReactNode})=>{
@@ -15,7 +16,7 @@ const layout = async ({children}: {children: React.ReactNode})=>{
 
     return(
         <main className="flex h-screen">
-            <Sidebar fullName={"hrithik"} email={"currentUser.email"} avatar={"/currentUser.avatar"}/>
+            <Sidebar fullName={"hrithik"} email={"currentUser.email"} avatar={avatarPlaceholderUrl}/>
             <section className="flex h-full flex-1 flex-col">
                 <MobileNavigation {...currentUser}/>
                 <Header/>
