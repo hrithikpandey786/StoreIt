@@ -5,12 +5,12 @@ import { Button } from "./ui/button";
 import Image from "next/image";
 import { signOutUser } from "@/lib/actions/user.actions";
 
-export default function Header(){
+export default function Header({userId, accountId}: {userId: string, accountId: string}){
     return(
         <header className="header">
             <Search/>
             <div className="header-wrapper">
-                <FileUploader/>
+                <FileUploader ownerId={userId} accountId={accountId}/>
                 <form action={async ()=>{
                     "use server";
                     await signOutUser();

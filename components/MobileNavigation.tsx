@@ -22,7 +22,7 @@ import { signOutUser } from "@/lib/actions/user.actions";
 
 
 interface Props{
-    ownerId: string;
+    $id: string;
     accountId: string;
     fullName: string;
     avatar: string;
@@ -30,7 +30,7 @@ interface Props{
 }
 
 
-export default function MobileNavigation({ownerId, accountId, fullName, avatar, email}: Props){
+export default function MobileNavigation({$id: ownerId, accountId, fullName, avatar, email}: Props){
     const [open, setOpen] = React.useState(false);
     const pathname = usePathname();
     
@@ -97,7 +97,7 @@ export default function MobileNavigation({ownerId, accountId, fullName, avatar, 
                     </nav>
                     <Separator className="my-5 bg-light-200/20"/>
                     <div className="flex flex-col justify-between gap-5 pb-5">
-                        <FileUploader/>
+                        <FileUploader ownerId={ownerId} accountId={accountId}/>
                         <Button
                             type="submit"
                             className="mobile-sign-out-button"

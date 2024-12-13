@@ -69,8 +69,10 @@ export const createAccount = async (fullName: string, email: string)=>{
         );
     }
 
-    return parseStringify({accountId});}catch(err){
+    return parseStringify({accountId});
+  }catch(err){
         console.log(err);
+        handleError(err, "Failed to create account");
     }
 }   
 

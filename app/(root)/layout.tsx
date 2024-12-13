@@ -10,16 +10,16 @@ import { avatarPlaceholderUrl } from "@/constants";
 const layout = async ({children}: {children: React.ReactNode})=>{
     const currentUser = await getCurrentUser();
     console.log(currentUser);
-    // if(!currentUser){
-    //     return redirect("/sign-in");
-    // }
+    if(!currentUser){
+        return redirect("/sign-in");
+    }
 
     return(
         <main className="flex h-screen">
             <Sidebar fullName={"hrithik"} email={"currentUser.email"} avatar={avatarPlaceholderUrl}/>
             <section className="flex h-full flex-1 flex-col">
                 <MobileNavigation {...currentUser}/>
-                <Header/>
+                <Header userId={currentUser.$id} accountId={currentUser.accountId}/>
                 <div className="main-content">
                     {children}
                 </div>
