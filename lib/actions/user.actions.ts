@@ -24,7 +24,7 @@ const getUserByEmail = async (email: string) =>{
             appwriteConfig.userCollectionId,
             [Query.equal("email", [email])],
         );
-        console.log("ggetuserbyemail", result);
+        // console.log("ggetuserbyemail", result);
         return result.total>0?result.documents[0]:null;
     } catch(err){
         console.log(err);
@@ -37,7 +37,7 @@ export const sendEmailOTP = async (email: string) => { //returning userId
 
     try{
         const session = await account.createEmailToken(ID.unique(), email);
-        console.log("sendEmailOTP", session);
+        // console.log("sendEmailOTP", session);
         return session.userId;
     } catch(error){
         await handleError(error, "Failed to send email OTP");
@@ -105,7 +105,7 @@ export const verifySecret = async ({
   }) => {
     try {
       const { account } = await createAdminClient();
-        console.log(accountId, password);
+        // console.log(accountId, password);
       const session = await account.createSession(accountId, password);
   
       (await cookies()).set("appwrite-session", session.secret, {
@@ -154,7 +154,7 @@ export const getCurrentUser = async () => {
         appwriteConfig.userCollectionId,
         [Query.equal("accountId", result.$id)],
       );
-      console.log(user);
+      // console.log(user);
       if (user.total <= 0) return null;
   
       return parseStringify(user.documents[0]);
@@ -180,7 +180,7 @@ export const getCurrentUser = async () => {
   export const signInUser = async ({email}: {email: string}) =>{
     try{
         const existingUser = await getUserByEmail(email);
-        console.log("signInUser", existingUser);
+        // console.log("signInUser", existingUser);
         if(existingUser){
             await sendEmailOTP(email);
 
