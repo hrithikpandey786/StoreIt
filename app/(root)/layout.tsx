@@ -9,7 +9,7 @@ import { avatarPlaceholderUrl } from "@/constants";
 
 const layout = async ({children}: {children: React.ReactNode})=>{
     const currentUser = await getCurrentUser();
-    console.log(currentUser);
+    // console.log(currentUser);
     if(!currentUser){
         return redirect("/sign-in");
     }
