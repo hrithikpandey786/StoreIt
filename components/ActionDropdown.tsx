@@ -29,7 +29,7 @@ import {
   updateFileUsers,
 } from "@/lib/actions/file.actions";
 import { usePathname } from "next/navigation";
-// import { FileDetails, ShareInput } from "@/components/ActionsModalContent";
+import { FileDetails, ShareInput } from "@/components/ActionsModalContent";
 
 const ActionDropdown = ({ file }: { file: Models.Document }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -46,7 +46,7 @@ const ActionDropdown = ({ file }: { file: Models.Document }) => {
     setIsDropdownOpen(false);
     setAction(null);
     setName(file.name);
-    //   setEmails([]);
+      setEmails([]);
   };
 
   const handleAction = async () => {
@@ -100,14 +100,14 @@ const ActionDropdown = ({ file }: { file: Models.Document }) => {
               onChange={(e) => setName(e.target.value)}
             />
           )}
-          {/* {value === "details" && <FileDetails file={file} />}
+          {value === "details" && <FileDetails file={file} />}
           {value === "share" && (
             <ShareInput
               file={file}
               onInputChange={setEmails}
               onRemove={handleRemoveUser}
             />
-          )} */}
+          )}
           {value === "delete" && (
             <p className="delete-confirmation">
               Are you sure you want to delete{` `}
