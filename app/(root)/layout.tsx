@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 import { avatarPlaceholderUrl } from "@/constants";
 
 
-export const dynamic = "force-dynammic";
+export const dynamic = "force-dynamic";
 
 const layout = async ({children}: {children: React.ReactNode})=>{
     const currentUser = await getCurrentUser();
